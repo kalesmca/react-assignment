@@ -2,7 +2,9 @@
     height: 100px;
     width: 100%;
     background-color: aliceblue;
+    position: fixed;
+    z-index: 10;
 }
 .body-container{
-    margin : 10px;
+    padding : 110px 10px;
 }
