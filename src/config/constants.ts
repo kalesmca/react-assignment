@@ -1,0 +1,5 @@
+export const name = "KALEES"
+export const API_KEY = "live_AUhtHu2H3mMR4J2R3OJWWyzYdHKVuHOVFSrMTMJjn9HpSxrYUpInnonIjipeZ91m";
+export const BASE_URL = "https://api.thedogapi.com"
+export const DOGS_LIST_URL = "/v1/breeds"
+export const BREED_SEARCH_URL = "https://api.thedogapi.com/v1/breeds/search?name=American&include_breeds=true"
