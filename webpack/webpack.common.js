@@ -6,6 +6,9 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
+  devServer: {
+    compress: true  // That solved it
+  },
   module: {
     rules: [
       {
@@ -31,6 +34,8 @@ module.exports = {
       },
     ],
   },
+  
+  
   output: {
     path: path.resolve(__dirname, '..', './build'),
     filename: 'bundle.js',
