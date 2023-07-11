@@ -5,5 +5,6 @@ declare module '*.svg' {
 }
 
 declare interface dashboardState  {
-  dogList:any[]
+  dogList:any[],
+  isBucketFull:boolean
 }
