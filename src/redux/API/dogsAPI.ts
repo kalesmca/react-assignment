@@ -4,7 +4,9 @@ import http from "./http-client";
 
 const dogsAPI = {
     getAllDogs: async (limit: number = CONSTANTS.LIMIT, page: number = 0) => {
-        const url = `${CONSTANTS.DOGS_LIST_URL}?limit=${limit}&page=${page}`
+        // const url = `${CONSTANTS.DOGS_LIST_URL}?limit=${limit}&page=${page}`
+        const url = `${CONSTANTS.DOGS_LIST_URL}`
+
         const resp = await http.get(url);
         return resp;
     },

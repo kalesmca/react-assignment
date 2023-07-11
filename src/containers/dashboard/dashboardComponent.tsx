@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllDogs, getDogsByBreedName } from "../../redux/actions/dashboard";
+import { getDogsByBreedName } from "../../redux/actions/dashboard";
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -15,7 +15,7 @@ const DashboardComponent = () => {
     const dispatch = useDispatch();
     const [query, setQuery] = useState("");
     const searchQuery = useDebounce(query, 2000)
-    const [key, setKey] = useState("nameDesc");
+    const [key, setKey] = useState("nameAsc");
 
     let index = 0;
     let flag = false
@@ -28,24 +28,28 @@ const DashboardComponent = () => {
         }
         if (!dashboard.isBucketFull && flag) {
             flag = false
-            searchQuery ? dispatch(getDogsByBreedName(searchQuery, true, dashboard)) : dispatch(getAllDogs(dashboard, true))
+            dispatch(getDogsByBreedName(searchQuery, true, dashboard, key)) 
             index = index + 1;
         }
 
 
     };
 
+    useEffect(()=>{
+        dispatch(getDogsByBreedName(searchQuery, false, dashboard, key))
+    },[key])
+
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     });
 
-    useEffect(() => {
-        dispatch(getAllDogs(dashboard, false))
+    // useEffect(() => {
+    //     dispatch(getDogsByBreedName(searchQuery, false, dashboard, key))
 
-    }, [])
+    // }, [])
     useEffect(() => {
-        dispatch(getDogsByBreedName(searchQuery, false, dashboard))
+        dispatch(getDogsByBreedName(searchQuery, false, dashboard, key))
 
     }, [searchQuery])
     useEffect(() => {
@@ -74,12 +78,14 @@ const DashboardComponent = () => {
               onSelect={(k) => setKey(k)}
               className="mb-3"
             >
-              <Tab eventKey="nameAsc" title="Name-Asc"></Tab>
-              <Tab eventKey="nameDesc" title="Name-Desc"></Tab>
-              <Tab eventKey="heightAsc" title="Height-Asc"></Tab>
-              <Tab eventKey="heightDesc" title="Height-Desc"></Tab>
-              <Tab eventKey="lifeSpanAsc" title="Life-Span-Asc"></Tab>
-              <Tab eventKey="lifeSpanDesc" title="Life-Span-Desc"></Tab>
+                {
+                    Object.keys(CONSTANTS.SORT_TAP_LIST).map((key:string, tabIndex) =>{
+                        return(
+                            <Tab key={tabIndex} eventKey={key} title={CONSTANTS.SORT_TAP_LIST[key].label}></Tab>
+                        )
+                    })
+                }
+              
             </Tabs>
           </span>
         </div>
@@ -101,10 +107,13 @@ const DashboardComponent = () => {
                                             <span className="card-body-value">{dog.life_span}</span>
                                         </div>
                                         <div className="card-body-content">
+                                            <span className="card-body-title">Height</span>
+                                            <span className="card-body-value">{dog.height.imperial}</span>
+                                        </div>
+                                        <div className="card-body-content">
                                             <span className="card-body-title">Temperament</span>
                                             <span className="card-body-value">{dog.temperament}</span>
                                         </div>
-
 
 
                                     </Card.Text>

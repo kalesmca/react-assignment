@@ -4,7 +4,8 @@ const initState: Dashboard = {
     dogList: [],
     isBucketFull:false,
     paginationIndex:0,
-    sortBy:"nameAsc"
+    sortBy:"nameAsc",
+    allDataList:[]
          
 }
 
@@ -15,7 +16,11 @@ const dashboard = (state=initState, action:any) =>{
         }
         case Types.UPDATE_DOGS:{
             return {
-                ...state, dogList: action.data, isBucketFull: action.isBucketFull, paginationIndex:action.stateIndex
+                ...state, 
+                dogList: action.data, 
+                isBucketFull: action.isBucketFull, 
+                paginationIndex:action.stateIndex,
+                allDataList:action.allDataList
             }
         }
                

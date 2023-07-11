@@ -8,7 +8,8 @@ declare interface Dashboard  {
   dogList:any[],
   isBucketFull:boolean,
   paginationIndex:0,
-  sortBy:String
+  sortBy:String,
+  allDataList:any[]
 }
 
 declare interface Dog {
@@ -23,6 +24,7 @@ declare interface Dog {
   weight:any,
   life_span?:String, 
   name:String,
-  filterdHeight?:number
+  filteredHeight?:number,
+  filteredLife?:number
 
 }
