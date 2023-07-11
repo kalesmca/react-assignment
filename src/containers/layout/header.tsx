@@ -2,7 +2,7 @@ import React from "react";
 
 export const Header = () =>{
     return(
-        <div>Header Component</div>
+        <div className="header-title">Dogs Collections</div>
     )
 }
 

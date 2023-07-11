@@ -7,7 +7,7 @@ export const getAllDogs = (currentState:any, isScrolling:false) => async(dispatc
     try{
         let stateIndex = currentState.paginationIndex;
         stateIndex = isScrolling ? stateIndex+1 : 0;
-        const dogsResp = await dogsAPI.getAllDogs(10,stateIndex);
+        const dogsResp = await dogsAPI.getAllDogs(CONSTANTS.LIMIT,stateIndex);
         console.log(dogsResp)
         if(dogsResp?.data && dogsResp.data?.length){
             dispatch(getDogs(dogsResp.data, false, stateIndex))
@@ -25,7 +25,7 @@ export const getDogsByBreedName = (query:string, isScrolling:boolean = false, cu
     try{
         let stateIndex = currentState.paginationIndex;
         stateIndex = isScrolling ? stateIndex+1 : 0;
-        const dogsResp = await dogsAPI.getDogByQuery(query, 10, stateIndex);
+        const dogsResp = await dogsAPI.getDogByQuery(query, CONSTANTS.LIMIT, stateIndex);
         console.log(dogsResp)
         if(dogsResp?.data && dogsResp.data?.length){
             const result = dogsResp.data.slice(0,  (stateIndex+1)*CONSTANTS.LIMIT)

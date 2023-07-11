@@ -4,7 +4,15 @@
     background-color: aliceblue;
     position: fixed;
     z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+.header-title{
+    font-size: 24px;
+    font-weight: 500;
+}
+
 .body-container{
     padding : 110px 10px;
 }
