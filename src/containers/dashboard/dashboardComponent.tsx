@@ -4,16 +4,19 @@ import { getAllDogs, getDogsByBreedName } from "../../redux/actions/dashboard";
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 import Card from 'react-bootstrap/Card';
 import { useDebounce } from "../../customHooks/useDebounce";
 import * as CONSTANTS from '../../config/constants';
 import './dashboard.css'
-const Dashboard = () => {
-    const dashboard: dashboardState = useSelector((state: any) => state.dashboard);
+const DashboardComponent = () => {
+    const dashboard: Dashboard = useSelector((state: any) => state.dashboard);
     const dispatch = useDispatch();
     const [query, setQuery] = useState("");
     const searchQuery = useDebounce(query, 2000)
+    const [key, setKey] = useState("nameDesc");
+
     let index = 0;
     let flag = false
 
@@ -50,7 +53,7 @@ const Dashboard = () => {
 
     }, [dashboard])
     return (
-        <div>
+        <div data-testid="dashboard-testId">
             <Form>
                 <Row className="mb-3">
                     <Form.Group as={Col} controlId="formGridEmail">
@@ -61,6 +64,25 @@ const Dashboard = () => {
                     </Form.Group>
                 </Row>
             </Form>
+            
+        <div>
+          <span className="sort-title">SortBy:</span>
+          <span>
+            <Tabs
+              id="controlled-tab-example"
+              activeKey={key}
+              onSelect={(k) => setKey(k)}
+              className="mb-3"
+            >
+              <Tab eventKey="nameAsc" title="Name-Asc"></Tab>
+              <Tab eventKey="nameDesc" title="Name-Desc"></Tab>
+              <Tab eventKey="heightAsc" title="Height-Asc"></Tab>
+              <Tab eventKey="heightDesc" title="Height-Desc"></Tab>
+              <Tab eventKey="lifeSpanAsc" title="Life-Span-Asc"></Tab>
+              <Tab eventKey="lifeSpanDesc" title="Life-Span-Desc"></Tab>
+            </Tabs>
+          </span>
+        </div>
             <div>
                 {
                     dashboard?.dogList?.length ? dashboard.dogList.map((dog: any, dIndex: number) => {
@@ -102,4 +124,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard;
+export default DashboardComponent;

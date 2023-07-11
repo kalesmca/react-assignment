@@ -1,9 +1,10 @@
 import * as Types from '../../config/actions';
 
-const initState: dashboardState = {
+const initState: Dashboard = {
     dogList: [],
     isBucketFull:false,
-    paginationIndex:0
+    paginationIndex:0,
+    sortBy:"nameAsc"
          
 }
 

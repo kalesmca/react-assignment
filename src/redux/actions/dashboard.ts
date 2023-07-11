@@ -41,7 +41,7 @@ export const getDogsByBreedName = (query:string, isScrolling:boolean = false, cu
     }
 }
 
-const getDogs =(data:any, flag:boolean=false, stateIndex:boolean) =>{
+const getDogs =(data:Dog[], flag:boolean=false, stateIndex:boolean) =>{
     return {
         type: actions.GET_DOGS,
         data,
@@ -50,7 +50,7 @@ const getDogs =(data:any, flag:boolean=false, stateIndex:boolean) =>{
     }
 }
 
-const updateDogsList = (data:any, stateIndex:number, isBucketFull:boolean) =>{
+const updateDogsList = (data:Dog[], stateIndex:number, isBucketFull:boolean) =>{
     return {
         type: actions.UPDATE_DOGS,
         data,
