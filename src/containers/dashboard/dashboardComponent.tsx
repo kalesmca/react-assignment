@@ -14,7 +14,7 @@ const DashboardComponent = () => {
     const dashboard: Dashboard = useSelector((state: any) => state.dashboard);
     const dispatch = useDispatch();
     const [query, setQuery] = useState("");
-    const searchQuery = useDebounce(query, 2000)
+    const searchQuery = useDebounce(query, 1000)
     const [key, setKey] = useState("nameAsc");
 
     let index = 0;

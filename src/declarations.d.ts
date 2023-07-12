@@ -12,6 +12,10 @@ declare interface Dashboard  {
   allDataList:any[]
 }
 
+declare interface AppConfig {
+  showSpinner: boolean
+}
+
 declare interface Dog {
   bred_for:String,
   breed_group:String,

@@ -24,6 +24,7 @@ export const getAllDogs = (currentState:any, isScrolling:false) => async(dispatc
 
 export const getDogsByBreedName = (query:string, isScrolling:boolean = false, currentState:any, sortByKey:string) =>async (dispatch:any) => {
     try{
+        dispatch(updateSpinnerStatus(true))
         const selectedTabObj = CONSTANTS.SORT_TAP_LIST[sortByKey]
 
         let stateIndex = currentState.paginationIndex;
@@ -46,13 +47,19 @@ export const getDogsByBreedName = (query:string, isScrolling:boolean = false, cu
             const result = sortedList.slice(0,  (stateIndex+1)*CONSTANTS.LIMIT)
             let bucketFull = result?.length< dogsResp?.data?.length ? false : true;
             dispatch(updateDogsList(result,sortedList, stateIndex, bucketFull))
+            dispatch(updateSpinnerStatus(false))
+
         } 
         else {
             dispatch(updateDogsList([],[],0, true))
+            dispatch(updateSpinnerStatus(false))
+
         }
     }
     catch(err){
         console.error('getAll dog error:', err)
+        dispatch(updateSpinnerStatus(false))
+
     }
 }
 
@@ -82,4 +89,11 @@ export const getSortedListByKey = (currentState:any, sortBy:string) => async(dis
     const result = sortedList.slice(0,  (stateIndex+1)*CONSTANTS.LIMIT)
     dispatch(updateDogsList(result,currentState.allDataList,stateIndex,false))
     
+}
+
+export const updateSpinnerStatus = (flag: boolean) =>{
+    return{
+        type: actions.UPDATE_SPINNER_STATUS,
+        flag
+    }
 }
