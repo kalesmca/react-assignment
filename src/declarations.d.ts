@@ -14,6 +14,8 @@ declare interface Dashboard  {
 
 declare interface AppConfig {
   showSpinner: boolean
+  showToast:boolean
+  toastMsg:String
 }
 
 declare interface Dog {

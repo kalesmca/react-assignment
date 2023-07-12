@@ -57,8 +57,9 @@ export const getDogsByBreedName = (query:string, isScrolling:boolean = false, cu
         }
     }
     catch(err){
-        console.error('getAll dog error:', err)
+        
         dispatch(updateSpinnerStatus(false))
+        dispatch(updateToast(true, "Please try some other time."))
 
     }
 }
@@ -95,5 +96,13 @@ export const updateSpinnerStatus = (flag: boolean) =>{
     return{
         type: actions.UPDATE_SPINNER_STATUS,
         flag
+    }
+}
+
+export const updateToast = (flag: boolean, message:String) =>{
+    return{
+        type: actions.UPDATE_TOAST,
+        toastMsg: message, 
+        showToast:flag
     }
 }
