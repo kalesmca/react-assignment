@@ -34,3 +34,7 @@ declare interface Dog {
   filteredLife?:number
 
 }
+
+declare interface Card {
+  dog:Dog
+}
